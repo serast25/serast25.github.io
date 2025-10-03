@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CV</title>
+  <style>
+    /* Reset & base */
+    :root{
+      --accent:#111827; /* dark for headings */
+      --muted:#6b7280; /* secondary text */
+      --bg:#ffffff;
+      --max-width:780px;
+      --gap:12px;
+      --section-gap:20px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--accent);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:28px 18px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      color:var(--accent);
+    }
+
+    /* Card */
+    .cv{
+      width:100%;
+      max-width:var(--max-width);
+      border-radius:10px;
+      padding:28px;
+      box-shadow:0 6px 18px rgba(15,23,42,0.06);
+      background:linear-gradient(180deg, rgba(255,255,255,0.99), rgba(250,250,250,0.99));
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:var(--section-gap);
+    }
+    .name{
+      font-size:22px;
+      font-weight:700;
+      letter-spacing:-0.2px;
+    }
+    .role{
+      font-size:12px;
+      color: rgb(177, 2, 2);
+      margin-top:6px;
+      font-weight:600;
+    }
+
+    .contact{
+      text-align:right;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    .contact a{color:inherit;text-decoration:none}
+
+    /* layout */
+    .section{margin-bottom:var(--section-gap)}
+    h3{
+      margin:0 0 10px 0;
+      font-size:13px;
+      letter-spacing:0.6px;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    /* Skills grid */
+    .skills{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+    .skill-list{font-size:13px;line-height:1.5;color:var(--accent)}
+    .skill-list li{margin-bottom:6px}
+
+    /* Experience */
+    .job{margin-bottom:12px}
+    .job .title{font-weight:500;font-size:14px}
+    .job .meta{font-size:12px;color:var(--muted);margin-top:3px}
+    .job .desc{font-size:13px;color:var(--accent);margin-top:8px}
+
+    /* Education */
+    .edu{margin-bottom:10px}
+    .edu .title{font-weight:500;font-size:14px}
+    .edu .meta{font-size:12px;color:var(--muted);margin-top:3px}
+    .edu .desc{font-size:13px;color:var(--accent);margin-top:8px}
+
+    /* Interests */
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{font-size:12px;padding:6px 8px;border-radius:999px;border:1px solid #6178d6;color: rgb(3, 143, 14)}
+
+    /* Thin divider */
+    .divider{height:2px;background:#ebfd81;margin:16px 0}
+
+    /* Responsive */
+    @media (max-width:680px){
+      .skills{grid-template-columns:1fr}
+      header{flex-direction:column;align-items:flex-start}
+      .contact{text-align:left}
+    }
+
+    /* Utility */
+    .muted{color:var(--muted)}
+
+  </style>
+</head>
+<body>
+  <article class="cv" role="article" aria-label="Curriculum Vitae">
+    <header>
+      <div>
+        <div class="name">Sergey Petrov</div>
+        <div class="role">It Support Specialist</div>
+      </div>
+      <div class="contact">
+        <div>📞💬 +7 777 8 135 999, WhatsApp</div>
+        <div>✉️ serast25@proton.me</div>
+      </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h3>Skills</h3>
+      <div class="skills">
+        <div>
+          <strong class="muted">Language skills</strong>
+          <ul class="skill-list">
+            <li>Russian &#9733;&#9733;&#9733;</li>
+            <li>English &#9733;&#9733;</li>
+            <li>Kazakh &#9733;</li>
+          </ul>
+        </div>
+        <div>
+          <strong class="muted">Soft skills</strong>
+          <ul class="skill-list">
+            <li>Teamwork of like-minded people</li>
+            <li>Effective communication</li>
+            <li>task->result + time management</li>
+            <li>horizon: strategic^tacticial^^operational^^^</li>
+            <li>EI <3</li>
+          </ul>
+        </div>
+        <div>
+          <strong class="muted">Hard skills</strong>
+          <ul class="skill-list">
+            <li>Windows, Unix-like, Computer Networks, AD, Git</li>
+            <li>LLM prompt engineering</li>
+            <li>Pascal, HTML/CSS, JS, Python, SQL</li>
+            <li>Draw.io</li>
+            <li>Figma, SketchUp, Photoshop, Gimp, Corel</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h3>Work Experience</h3>
+
+      <div class="job">
+        <div class="title">Food Operator | Dorney Park & Wildwater Kingdom</div>
+        <div class="meta">2010, USA PA - Allentown</div>
+        <!-- <div class="desc"></div> -->
+      </div>
+
+      <div class="job">
+        <div class="title">It Support Specialist | Language Development Center</div>
+        <div class="title">System Administrator | Kazpost JSC</div>
+        <div class="meta">2011-2015, KZ - Arkalyk</div>
+        <div class="desc">Maintenance and repair of computer and office equipment. Computer network support. Prompt closure of the SLA. ATM service.</div>
+      </div>
+
+      <div class="job">
+        <div class="title">Dental Technician Trainee | Private dental laboratory</div>
+        <div class="title">Dental Technician | Eskabilov LLP</div>
+        <div class="title">Dental Technician | Marjan-Tis LLP</div>
+        <div class="meta">2015-2019, KZ - Astana-Arkalyk-Kostanay</div>
+        <!-- <div class="desc"></div> -->
+      </div>
+
+      <div class="job">
+        <div class="title">Teacher of Additional Education + IT Support Specialist | Children's and Youth Center "Zhas-Ulan"</div>
+        <div class="meta">2019-2023, KZ - Arkalyk</div>
+        <div class="desc">Teaching computer courses for schoolchildren - Front-End development, Python, graphic editors - Figma-Gimp-Photoshop-CorelDRAW, 3D modeling, robotics. The participation of pupils in city, regional and republican competitions and their winning places in them. Organization and holding of events. Maintenance and repair of computer and office equipment. Computer network support. Graphic design and typography.</div>
+      </div>
+
+      <div class="job">
+        <div class="title">It Support Specialist | State Revenue Administration (Tax)</div>
+        <div class="meta">2011-2015, KZ - Arkalyk</div>
+        <div class="desc">Maintenance and repair of computer and office equipment. Computer network support. Prompt closure of the SLA. Maintenance of information systems of state taxation. Digital policy and access rights.</div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h3>Education</h3>
+      <div class="edu">
+        <div class="title">Pascal Programming | Center for additional Education</div>
+        <div class="meta">2006, KZ - Arkalyk</div>
+        <!-- <div class="desc"></div> -->
+      </div>
+      <div class="edu">
+        <div class="title">Bachelor of Computer Science | State Pedagogical Institute</div>
+        <div class="meta">2007-2011, KZ - Arkalyk</div>
+        <!-- <div class="desc"></div> -->
+      </div>
+      <div class="edu">
+        <div class="title">Orthopedic Dentistry | Medical and Technical Collegen</div>
+        <div class="meta">2015-2017, KZ - Astana</div>
+        <!-- <div class="desc"></div> -->
+      </div>
+      <div class="edu">
+        <div class="title">Interactive SQL Simulator | stepik.org</div>
+        <div class="meta">2024</div>
+        <!-- <div class="desc"></div> -->
+      </div>
+      <div class="edu">
+        <div class="title">Financial Markets by Yale University | coursera.org</div>
+        <div class="meta">2025</div>
+        <!-- <div class="desc"></div> -->
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h3>Interests</h3>
+      <div class="chips">
+        <span class="chip">health and physical culture</span>
+        <span class="chip">finance</span>
+        <span class="chip">explore and discover</span>
+        <span class="chip">travel</span>
+        <span class="chip">books</span>
+        <span class="chip">...</span>
+      </div>
+    </section>
+
+    <!-- <footer style="margin-top:18px;font-size:12px;color:var(--muted)">
+      <div>...</div>
+    </footer> -->
+  </article>
+</body>
+</html>
