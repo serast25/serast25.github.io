@@ -1,0 +1,9 @@
+- add margin beetwen skill blocks
+- add and fill footer
+- change fonts, colors
+- change icons
+- add dark\light theme
+- 
+
+?! - make cv lego-like looking
+?! - add accessibility
