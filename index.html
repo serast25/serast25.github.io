@@ -35,9 +35,44 @@
       width:100%;
       max-width:var(--max-width);
       border-radius:10px;
-      padding:28px;
+      padding:20px 28px;
       box-shadow:0 6px 18px rgba(15,23,42,0.06);
       background:linear-gradient(180deg, rgba(255,255,255,0.99), rgba(250,250,250,0.99));
+    }
+
+    /* Language row (above header) */
+    .lang-row{
+      display:flex;
+      justify-content:flex-end;
+      gap:8px;
+      margin-bottom:12px;
+      align-items:center;
+    }
+    #lang-switcher{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    #lang-switcher button{
+      background:transparent;
+      border:1px solid rgba(17,24,39,0.08);
+      padding:6px 8px;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:13px;
+      line-height:1;
+      min-width:54px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+    }
+    #lang-switcher button:hover{ transform: translateY(-1px); }
+    #lang-switcher button:focus{ outline:2px solid rgba(99,102,241,0.18); outline-offset:2px; }
+    #lang-switcher button.active{
+      background:var(--accent);
+      color:#fff;
+      border-color:var(--accent);
     }
 
     header{
@@ -83,8 +118,9 @@
       grid-template-columns:repeat(3,1fr);
       gap:10px;
     }
-    .skill-list{font-size:13px;line-height:1.5;color:var(--accent)}
-    .skill-list li{margin-bottom:6px}
+    .skill-list{font-size:13px;line-height:1.5;color:var(--accent); padding-left:14px}
+    .skill-list li{margin-bottom:6px; list-style:none}
+    .skill-list li::before{ content: "• "; color:var(--muted); display:inline-block; width:14px; margin-left:-14px;}
 
     /* Experience */
     .job{margin-bottom:12px}
@@ -110,58 +146,55 @@
       .skills{grid-template-columns:1fr}
       header{flex-direction:column;align-items:flex-start}
       .contact{text-align:left}
+      .lang-row{justify-content:flex-start}
+      #lang-switcher button{padding:6px 6px;font-size:12px; min-width:44px;}
+      .cv{padding:16px}
     }
 
     /* Utility */
     .muted{color:var(--muted)}
-
   </style>
 </head>
 <body>
   <article class="cv" role="article" aria-label="Curriculum Vitae">
+    <!-- language switcher row (integrated into layout) -->
+    <div class="lang-row" aria-hidden="false">
+      <div id="lang-switcher" role="tablist" aria-label="Language switcher">
+        <button class="lang-btn" data-lang="en" aria-pressed="true" title="English">EN</button>
+        <button class="lang-btn" data-lang="ru" aria-pressed="false" title="Русский">RU</button>
+        <button class="lang-btn" data-lang="kz" aria-pressed="false" title="Қазақша">KZ</button>
+      </div>
+    </div>
+
     <header>
       <div>
-        <div class="name">Sergey Petrov</div>
-        <div class="role">It Support Specialist</div>
+        <div class="name" data-i18n="name">Sergey Petrov</div>
+        <div class="role" data-i18n="role">IT Support Specialist, System Administrator</div>
       </div>
       <div class="contact">
-        <div>📞💬 +7 777 8 135 999, WhatsApp</div>
-        <div>✉️ serast25@proton.me</div>
+        <div data-i18n="contact_phone">📞💬 +7 777 8 135 999, WhatsApp</div>
+        <div data-i18n="contact_email">✉️ serast25@proton.me</div>
       </div>
     </header>
 
     <div class="divider"></div>
 
     <section class="section">
-      <h3>Skills</h3>
+      <h3 data-i18n="skills_h">Skills</h3>
       <div class="skills">
         <div>
-          <strong class="muted">Language skills</strong>
-          <ul class="skill-list">
-            <li>Russian &#9733;&#9733;&#9733;</li>
-            <li>English &#9733;&#9733;</li>
-            <li>Kazakh &#9733;</li>
+          <strong class="muted" data-i18n="skills.lang_title">Language skills</strong>
+          <ul class="skill-list" data-i18n-list="skills.lang_items">
+            <!-- items will be injected -->
           </ul>
         </div>
         <div>
-          <strong class="muted">Soft skills</strong>
-          <ul class="skill-list">
-            <li>Teamwork of like-minded people</li>
-            <li>Effective communication</li>
-            <li>task->result + time management</li>
-            <li>horizon: strategic^tacticial^^operational^^^</li>
-            <li>EI <3</li>
-          </ul>
+          <strong class="muted" data-i18n="skills.soft_title">Soft skills</strong>
+          <ul class="skill-list" data-i18n-list="skills.soft_items"></ul>
         </div>
         <div>
-          <strong class="muted">Hard skills</strong>
-          <ul class="skill-list">
-            <li>Windows, Unix-like, Computer Networks, AD, Git</li>
-            <li>LLM prompt engineering</li>
-            <li>Pascal, HTML/CSS, JS, Python, SQL</li>
-            <li>Draw.io</li>
-            <li>Figma, SketchUp, Photoshop, Gimp, Corel</li>
-          </ul>
+          <strong class="muted" data-i18n="skills.hard_title">Hard skills</strong>
+          <ul class="skill-list" data-i18n-list="skills.hard_items"></ul>
         </div>
       </div>
     </section>
@@ -169,91 +202,232 @@
     <div class="divider"></div>
 
     <section class="section">
-      <h3>Work Experience</h3>
+      <h3 data-i18n="workExp_h">Work Experience</h3>
 
-      <div class="job">
-        <div class="title">Food Operator | Dorney Park & Wildwater Kingdom</div>
-        <div class="meta">2010, USA PA - Allentown</div>
-        <!-- <div class="desc"></div> -->
-      </div>
-
-      <div class="job">
-        <div class="title">It Support Specialist | Language Development Center</div>
-        <div class="title">System Administrator | Kazpost JSC</div>
-        <div class="meta">2011-2015, KZ - Arkalyk</div>
-        <div class="desc">Maintenance and repair of computer and office equipment. Computer network support. Prompt closure of the SLA. ATM service.</div>
-      </div>
-
-      <div class="job">
-        <div class="title">Dental Technician Trainee | Private dental laboratory</div>
-        <div class="title">Dental Technician | Eskabilov LLP</div>
-        <div class="title">Dental Technician | Marjan-Tis LLP</div>
-        <div class="meta">2015-2019, KZ - Astana-Arkalyk-Kostanay</div>
-        <!-- <div class="desc"></div> -->
-      </div>
-
-      <div class="job">
-        <div class="title">Teacher of Additional Education + IT Support Specialist | Children's and Youth Center "Zhas-Ulan"</div>
-        <div class="meta">2019-2023, KZ - Arkalyk</div>
-        <div class="desc">Teaching computer courses for schoolchildren - Front-End development, Python, graphic editors - Figma-Gimp-Photoshop-CorelDRAW, 3D modeling, robotics. The participation of pupils in city, regional and republican competitions and their winning places in them. Organization and holding of events. Maintenance and repair of computer and office equipment. Computer network support. Graphic design and typography.</div>
-      </div>
-
-      <div class="job">
-        <div class="title">It Support Specialist | State Revenue Administration (Tax)</div>
-        <div class="meta">2024-2025, KZ - Arkalyk</div>
-        <div class="desc">Maintenance and repair of computer and office equipment. Computer network support. Prompt closure of the SLA. Maintenance of information systems of state taxation. Digital policy and access rights.</div>
+      <div id="jobs" data-i18n-collection="jobs">
+        <!-- jobs injected here -->
       </div>
     </section>
 
     <div class="divider"></div>
 
     <section class="section">
-      <h3>Education</h3>
-      <div class="edu">
-        <div class="title">Pascal Programming | Center for additional Education</div>
-        <div class="meta">2006, KZ - Arkalyk</div>
-        <!-- <div class="desc"></div> -->
-      </div>
-      <div class="edu">
-        <div class="title">Bachelor of Computer Science | State Pedagogical Institute</div>
-        <div class="meta">2007-2011, KZ - Arkalyk</div>
-        <!-- <div class="desc"></div> -->
-      </div>
-      <div class="edu">
-        <div class="title">Orthopedic Dentistry | Medical and Technical Collegen</div>
-        <div class="meta">2015-2017, KZ - Astana</div>
-        <!-- <div class="desc"></div> -->
-      </div>
-      <div class="edu">
-        <div class="title">Interactive SQL Simulator | stepik.org</div>
-        <div class="meta">2024</div>
-        <!-- <div class="desc"></div> -->
-      </div>
-      <div class="edu">
-        <div class="title">Financial Markets by Yale University | coursera.org</div>
-        <div class="meta">2025</div>
-        <!-- <div class="desc"></div> -->
+      <h3 data-i18n="education_h">Education</h3>
+      <div id="edu" data-i18n-collection="edus">
+        <!-- education injected here -->
       </div>
     </section>
 
     <div class="divider"></div>
 
     <section class="section">
-      <h3>Interests</h3>
-      <div class="chips">
-        <span class="chip">health and physical culture</span>
-        <span class="chip">finance</span>
-        <span class="chip">explore and discover</span>
-        <span class="chip">travel</span>
-        <span class="chip">books</span>
-        <span class="chip">...</span>
+      <h3 data-i18n="interests_h">Interests</h3>
+      <div class="chips" data-i18n-list="interests">
+        <!-- chips injected here -->
       </div>
     </section>
-
-    <!-- <footer style="margin-top:18px;font-size:12px;color:var(--muted)">
-      <div>...</div>
-    </footer> -->
   </article>
+
+  <script>
+    // ---------- translations ----------
+    const translations = {
+      en: {
+        name: "Sergey Petrov",
+        role: "IT Support Specialist, System Administrator",
+        contact_phone: "📞💬 +7 777 8 135 999, WhatsApp",
+        contact_email: "✉️ serast25@proton.me",
+        skills_h: "Skills",
+        skills: {
+          lang_title: "Language skills",
+          lang_items: ["Russian ★★★", "English ★★", "Kazakh ★"],
+          soft_title: "Soft skills",
+          soft_items: ["Teamwork of like-minded people", "Effective communication", "task->quality->speed->result + time management", "horizon: strategic^tacticial^^operational^^^", "EI <3"],
+          hard_title: "Hard skills",
+          hard_items: ["Windows, Unix-like, Computer Networks, AD, Git", "LLM prompt engineering", "Pascal, HTML/CSS, JS, Python, SQL", "Draw.io", "Figma, SketchUp, Photoshop, GIMP, Corel"]
+        },
+        workExp_h: "Work Experience",
+        jobs: [
+          { title: "Food Operator | Dorney Park & Wildwater Kingdom", meta: "2010, USA PA - Allentown", desc: "" },
+          { title: "It Support Specialist | Language Development Center <br>System Administrator | Kazpost JSC", meta: "2011-2015, KZ - Arkalyk", desc: "Maintenance and repair of computer and office equipment. Computer network support. Prompt closure of the SLA. ATM service." },
+          { title: "Dental Technician Trainee | Private dental laboratory <br>Dental Technician | Eskabilov LLP <br>Dental Technician | Marjan-Tis LLP", meta: "2015-2019, KZ - Astana-Arkalyk-Kostanay", desc: "" },
+          { title: "Teacher of Additional Education + IT Support Specialist | Children's and Youth Center Zhas-Ulan", meta: "2019-2023, KZ - Arkalyk", desc: "Teaching computer courses for schoolchildren - Front-End development, Python, graphic editors - Figma-Gimp-Photoshop-CorelDRAW, 3D modeling, robotics. The participation of pupils in city, regional and republican competitions and their winning places in them. Organization and holding of events. Maintenance and repair of computer and office equipment. Computer network support. Graphic design and typography." },
+          { title: "It Support Specialist | State Revenue Administration (Tax)", meta: "2024-2025, KZ - Arkalyk", desc: "Maintenance and repair of computer and office equipment. Computer network support. installation and configuration of video surveillance. Prompt closure of the SLA. Maintenance of information systems of state taxation. Digital policy and access rights." }
+        ],
+        education_h: "Education",
+        edus: [
+          { title: "Pascal Programming | Center for additional Education", meta: "2006, KZ - Arkalyk", desc: "" },
+          { title: "Bachelor of Computer Science | State Pedagogical Institute", meta: "2007-2011, KZ - Arkalyk", desc: "" },
+          { title: "Orthopedic Dentistry | Medical and Technical Collegen", meta: "2015-2017, KZ - Astana", desc: "" },
+          { title: "Interactive SQL Simulator | stepik.org", meta: "2024", desc: "" },
+          { title: "Financial Markets by Yale University | coursera.org", meta: "2025", desc: "" }
+        ],
+        interests_h: "Interests",
+        interests: ["health and physical culture", "finance", "explore and discover", "travel", "books", "..."]
+      },
+
+      ru: {
+        name: "Сергей Петров",
+        role: "IT-саппорт, Системный администратор",
+        contact_phone: "📞💬 +7 777 8 135 999, WhatsApp",
+        contact_email: "✉️ serast25@proton.me",
+        skills_h: "Навыки",
+        skills: {
+          lang_title: "Языковые навыки",
+          lang_items: ["Русский ★★★", "Английский ★★", "Казахский ★"],
+          soft_title: "Мягкая сила",
+          soft_items: ["Тимворк", "эффектиная коммуникация", "задача->качество->скорость=результат", "Горизонт планирования", "Эмоциональный интеллект"],
+          hard_title: "Технические навыки",
+          hard_items: ["Windows, Unix-подобные, Компьютерные сети, AD, Git", "Промпт-инжиринг LLM", "Pascal, HTML/CSS, JS, Python, SQL", "Draw.io", "Figma, SketchUp, Photoshop, GIMP, Corel"]
+        },
+        workExp_h: "Опыт работы",
+        jobs: [
+          { title: "Приготовление и реализация фастфуда | Dorney Park & Wildwater Kingdom", meta: "2010, США Пенсильвания - Аллентаун", desc: "" },
+          { title: "IT-саппорт | Центр развития языков при акимате города Аркалыка <br>Системный администратор | АО Казпочта", meta: "2011-2015, КАЗ - Аркалык", desc: "Обслуживание, ремонт компьютерной и оргтехники. Поддержка сетевой инфраструктуры. Оперативное SLA. Обслуживание банкоматов." },
+          { title: "Зубной техник стажёр | Частная зуботехническая лаборатория <br>Зубной техник | ТОО Ескабылов <br>Зубной техник | ТОО Маржан-Тыс", meta: "2015-2019, КАЗ - Астана-Аркалык-Костанай", desc: "" },
+          { title: "ПДО + IT-саппорт | ДЮЦ Жас-Улан", meta: "2019-2023, КАЗ - Аркалык", desc: "Преподавание компьютерных курсов для школьников - Front-End разработка, Python, графические редакторы - Figma-Gimp-Photoshop-CorelDRAW, 3D моделирование, робототехника. Участие воспитанников в городских, областных и республиканских конкурсах и их призовые места в них. Организация и проведение мероприятий. Обслуживание, ремонт компьютерной и оргтехники. Поддержка сетевой инфраструктуры. Графический дизайн и полиграфия." },
+          { title: "IT-саппорт | УГД по городу Аркалыку", meta: "2024-2025, КАЗ - Аркалык", desc: "Обслуживание, ремонт компьютерной и оргтехники. Поддержка сетевой инфраструктуры. Установка и настройка видеонаблюдения. Оперативное SLA. Сопровождение информационных систем налогообложения. Цифровая политика и права доступа." }
+        ],
+        education_h: "Образование",
+        edus: [
+          { title: "Программирование на Pascal | ЦДО", meta: "2006, КАЗ - Аркалык", desc: "" },
+          { title: "Бакалавр Computer Science | Государственный педагогический институт им. Ы. Алтынсарина", meta: "2007-2011, КАЗ - Аркалык", desc: "" },
+          { title: "Стоматология ортопедическая | Медико-технический колледж им. профессора Рузуддинова", meta: "2015-2017, КАЗ - Астана", desc: "" },
+          { title: "Интерактивный тренажер по SQL | stepik.org", meta: "2024", desc: "" },
+          { title: "Финансовые рынки | coursera.org", meta: "2025", desc: "" }
+        ],
+        interests_h: "Интересы",
+        interests: ["здоровье и физическая культура", "финансы", "исследования и открытия", "путешествия", "книги", "..."]
+      },
+
+      kz: {
+        name: "Аты Тегі",
+        role: "IT қолдау маманы",
+        contact_phone: "📞💬 +7 777 77777, WhatsApp",
+        contact_email: "✉️ ff77fgdf@proton.me",
+        skills_h: "Дағдылар",
+        skills: {
+          lang_title: "Тілдік дағдылар",
+          lang_items: ["Орыс ★★★", "Ағылшын ★★", "Қазақ ★"],
+          soft_title: "Жұмсақ дағдылар",
+          soft_items: ["Эмоционалдық интеллект", "Коммуникация", "Мәселені шешу", "Топта жұмыс", "Бейімделу"],
+          hard_title: "Кәсіптік дағдылар",
+          hard_items: ["Windows, Unix-тәрізді, Желілер, AD, Git", "LLM үшін prompt инженериясы", "Pascal, HTML/CSS, JS, Python, SQL", "Draw.io", "Figma, SketchUp, Photoshop, GIMP, Corel"]
+        },
+        workExp_h: "Жұмыс тәжірибесі",
+        jobs: [
+          { title: "Лауазым 1", meta: "2009, Компания 1", desc: "Сипаттама 1" },
+          { title: "Лауазым 2", meta: "2010, Компания 2", desc: "Сипаттама 2" },
+          { title: "Лауазым 3", meta: "2011, Компания 3", desc: "Сипаттама 3" },
+          { title: "Лауазым 4", meta: "2011, Компания 4", desc: "Сипаттама 4" },
+          { title: "Лауазым 5", meta: "2011, Компания 5", desc: "Сипаттама 5" }
+          
+        ],
+        education_h: "Білім",
+        edus: [
+          { title: "Оқу орны 1", meta: "2006, Орын 1", desc: "" },
+          { title: "Оқу орны 2", meta: "2007, Орын 2", desc: "" },
+          { title: "Оқу орны 3", meta: "2008, Орын 3", desc: "" }
+        ],
+        interests_h: "Қызығушылықтар",
+        interests: ["денсаулық және дене мәдениеті", "қаржы", "іздену және ашу", "саяхат", "кітаптар", "..."]
+      }
+    };
+
+    // ---------- helpers ----------
+    function getNested(obj, path){
+      if(!path) return undefined;
+      return path.split('.').reduce((o,k) => (o && o[k] !== undefined) ? o[k] : undefined, obj);
+    }
+
+    function applyTranslations(lang){
+      const t = translations[lang] || translations.en;
+
+      // simple data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const val = getNested(t, key);
+        if (val !== undefined) el.textContent = val;
+      });
+
+      // lists
+      document.querySelectorAll('[data-i18n-list]').forEach(el => {
+        const key = el.getAttribute('data-i18n-list');
+        const arr = getNested(t, key);
+        if (Array.isArray(arr)){
+          if (el.tagName.toLowerCase() === 'ul'){
+            el.innerHTML = arr.map(item => `<li>${item}</li>`).join('');
+          } else {
+            // chips or other containers
+            el.innerHTML = arr.map(item => `<span class="chip">${item}</span>`).join('');
+          }
+        }
+      });
+
+      // collections: jobs
+      const jobsContainer = document.getElementById('jobs');
+      const jobs = getNested(t, 'jobs');
+      if (jobsContainer && Array.isArray(jobs)){
+        jobsContainer.innerHTML = jobs.map(j => 
+          `<div class="job">
+            <div class="title">${j.title}</div>
+            <div class="meta">${j.meta}</div>
+            <div class="desc">${j.desc}</div>
+          </div>`
+        ).join('');
+      }
+
+      // education
+      const eduContainer = document.getElementById('edu');
+      const edus = getNested(t, 'edus');
+      if (eduContainer && Array.isArray(edus)){
+        eduContainer.innerHTML = edus.map(e => 
+          `<div class="edu">
+            <div class="title">${e.title}</div>
+            <div class="meta">${e.meta}</div>
+            <div class="desc">${e.desc || ''}</div>
+          </div>`
+        ).join('');
+      }
+
+      // update html lang (use 'kk' for Kazakh)
+      const docLang = (lang === 'kz') ? 'kk' : lang;
+      document.documentElement.lang = docLang;
+
+      // update active button states/aria-pressed
+      document.querySelectorAll('#lang-switcher button').forEach(btn => {
+        const isActive = btn.dataset.lang === lang;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', String(isActive));
+      });
+
+      // store choice
+      try { localStorage.setItem('cv_lang', lang); } catch(e){}
+    }
+
+    // ---------- init ----------
+    (function initLang(){
+      const saved = localStorage.getItem('cv_lang');
+      const start = saved || 'en';
+      // set up button listeners
+      document.querySelectorAll('#lang-switcher button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const lang = btn.dataset.lang;
+          applyTranslations(lang);
+        });
+      });
+      // apply initial
+      applyTranslations(start);
+    })();
+
+    // Optional: allow keyboard cycle with Ctrl+L (nice-to-have)
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'l'){
+        const order = ['en','ru','kz'];
+        const cur = localStorage.getItem('cv_lang') || 'en';
+        const next = order[(order.indexOf(cur) + 1) % order.length];
+        applyTranslations(next);
+      }
+    });
+  </script>
 </body>
 </html>
-
