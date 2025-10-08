@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CV</title>
+  <style>
+    /* Reset & base */
+    :root{
+      --accent:#111827; /* dark for headings */
+      --muted:#6b7280; /* secondary text */
+      --bg:#ffffff;
+      --max-width:780px;
+      --gap:12px;
+      --section-gap:20px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--accent);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:28px 18px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      color:var(--accent);
+    }
+
+    /* Card */
+    .cv{
+      width:100%;
+      max-width:var(--max-width);
+      border-radius:10px;
+      padding:20px 28px;
+      box-shadow:0 6px 18px rgba(15,23,42,0.06);
+      background:linear-gradient(180deg, rgba(255,255,255,0.99), rgba(250,250,250,0.99));
+    }
+
+    /* Language row (above header) */
+    .lang-row{
+      display:flex;
+      justify-content:flex-end;
+      gap:8px;
+      margin-bottom:12px;
+      align-items:center;
+    }
+    #lang-switcher{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    #lang-switcher button{
+      background:transparent;
+      border:1px solid rgba(17,24,39,0.08);
+      padding:6px 8px;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:13px;
+      line-height:1;
+      min-width:54px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+    }
+    #lang-switcher button:hover{ transform: translateY(-1px); }
+    #lang-switcher button:focus{ outline:2px solid rgba(99,102,241,0.18); outline-offset:2px; }
+    #lang-switcher button.active{
+      background:var(--accent);
+      color:#fff;
+      border-color:var(--accent);
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:var(--section-gap);
+    }
+    .name{
+      font-size:22px;
+      font-weight:700;
+      letter-spacing:-0.2px;
+    }
+    .role{
+      font-size:12px;
+      color: rgb(177, 2, 2);
+      margin-top:6px;
+      font-weight:600;
+    }
+
+    .contact{
+      text-align:right;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    .contact a{color:inherit;text-decoration:none}
+
+    /* layout */
+    .section{margin-bottom:var(--section-gap)}
+    h3{
+      margin:0 0 10px 0;
+      font-size:13px;
+      letter-spacing:0.6px;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    /* Skills grid */
+    .skills{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+    .skill-list{font-size:13px;line-height:1.5;color:var(--accent); padding-left:14px}
+    .skill-list li{margin-bottom:6px; list-style:none}
+    .skill-list li::before{ content: "• "; color:var(--muted); display:inline-block; width:14px; margin-left:-14px;}
+
+    /* Experience */
+    .job{margin-bottom:12px}
+    .job .title{font-weight:500;font-size:14px}
+    .job .meta{font-size:12px;color:var(--muted);margin-top:5px}
+    .job .desc{font-size:13px;color:var(--accent);margin-top:8px}
+
+    /* Education */
+    .edu{margin-bottom:10px}
+    .edu .title{font-weight:500;font-size:14px}
+    .edu .meta{font-size:12px;color:var(--muted);margin-top:5px}
+    .edu .desc{font-size:13px;color:var(--accent);margin-top:8px}
+
+    /* Interests */
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{font-size:12px;padding:6px 8px;border-radius:999px;border:1px solid #6178d6;color: rgb(3, 143, 14)}
+
+    /* Thin divider */
+    .divider{height:4px;background:#ebfd81;margin:22px 0}
+    .divider-2{height:4px;background:#ffffff;margin:14px 0}
+
+    /* Responsive */
+    @media (max-width:680px){
+      .skills{grid-template-columns:1fr}
+      header{flex-direction:column;align-items:flex-start}
+      .contact{text-align:left}
+      .lang-row{justify-content:flex-start}
+      #lang-switcher button{padding:6px 6px;font-size:12px; min-width:44px;}
+      .cv{padding:16px}
+    }
+
+    /* Utility */
+    .muted{color:var(--muted)}
+
+    /* Styling hr*/
+    hr {
+      border: none; 
+      border-top: 1px solid #cccccc2f;
+      margin-top: 4px;
+      margin-bottom: 3px;
+    }
+    
+  </style>
+</head>
+<body>
+  <article class="cv" role="article" aria-label="Curriculum Vitae">
+    <!-- language switcher row (integrated into layout) -->
+    <div class="lang-row" aria-hidden="false">
+      <div id="lang-switcher" role="tablist" aria-label="Language switcher">
+        <button class="lang-btn" data-lang="en" aria-pressed="true" title="English">EN</button>
+        <button class="lang-btn" data-lang="ru" aria-pressed="false" title="Русский">RU</button>
+        <button class="lang-btn" data-lang="kz" aria-pressed="false" title="Қазақша">KZ</button>
+      </div>
+    </div>
+
+    <header>
+      <div>
+        <div class="name" data-i18n="name">Sergey Petrov</div>
+        <div class="role" data-i18n="role">IT Support Specialist, System Administrator</div>
+      </div>
+      <div class="contact">
+        <div data-i18n="contact_phone">📞💬 +7 777 8 135 999, WhatsApp</div>
+        <div data-i18n="contact_email">✉️ serast25@proton.me</div>
+      </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h3 data-i18n="skills_h">Skills</h3>
+      <div class="skills">
+        <div>
+          <strong class="muted" data-i18n="skills.lang_title">Language skills</strong>
+          <ul class="skill-list" data-i18n-list="skills.lang_items">
+            <!-- items will be injected -->
+          </ul>
+        </div>
+        <div>
+          <strong class="muted" data-i18n="skills.soft_title">Soft skills</strong>
+          <ul class="skill-list" data-i18n-list="skills.soft_items"></ul>
+        </div>
+        <div>
+          <strong class="muted" data-i18n="skills.hard_title">Hard skills</strong>
+          <ul class="skill-list" data-i18n-list="skills.hard_items"></ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h3 data-i18n="workExp_h">Work Experience</h3>
+
+      <div id="jobs" data-i18n-collection="jobs">
+        <!-- jobs injected here -->
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h3 data-i18n="education_h">Education</h3>
+      <div id="edu" data-i18n-collection="edus">
+        <!-- education injected here -->
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h3 data-i18n="interests_h">Interests</h3>
+      <div class="chips" data-i18n-list="interests">
+        <!-- chips injected here -->
+      </div>
+    </section>
+  </article>
+
+  <script>
+    // ---------- translations ----------
+    const translations = {
+      en: {
+        name: "Sergey Petrov",
+        role: "IT Support Specialist, System Administrator",
+        contact_phone: "📞💬 +7 777 8 135 999, WhatsApp",
+        contact_email: "✉️ serast25@proton.me",
+        skills_h: "Skills",
+        skills: {
+          lang_title: "Language",
+          lang_items: ["Russian ★★★", "English ★★", "Kazakh ★"],
+          soft_title: "Soft",
+          soft_items: ["Teamwork of like-minded people", "Effective communication", "Task>quality>speed=result", "horizon: strategic^tacticial^^operational^^^", "EI <3"],
+          hard_title: "Hard",
+          hard_items: ["Windows, Unix-like, Computer Networks", "LLM prompt engineering", "PowerShell, bash, AD, Git, KeePassXC", "HTML/CSS, JS, Python, SQL, Pascal", "Draw.io, Figma, SketchUp, Photoshop, GIMP, Corel"]
+        },
+        workExp_h: "Work Experience",
+        jobs: [
+          { title: "Food Operator | Dorney Park & Wildwater Kingdom", meta: "2010, USA PA - Allentown", desc: "" },
+          { title: "It Support Specialist | Language Development Center <hr>System Administrator | Kazpost JSC", meta: "2011-2015, KZ - Arkalyk", desc: "Maintenance of computers, office equipment and ATMs. Network infrastructure and user support. Operational SLA." },
+          { title: "Dental Technician Trainee | Private dental laboratory <hr>Dental Technician | Eskabilov LLP <hr>Dental Technician | Marjan-Tis LLP", meta: "2015-2019, KZ - Astana-Arkalyk-Kostanay", desc: "" },
+          { title: "Teacher of Additional Education + IT Support Specialist | Children's and Youth Center Zhas-Ulan", meta: "2019-2023, KZ - Arkalyk", desc: "Teaching computer courses for schoolchildren - Front-End development, Python, graphic editors - Figma-Gimp-Photoshop-CorelDRAW, 3D modeling, robotics (Lego Mindstorms, Arduino). The participation of pupils in city, regional and republican competitions and their winning of prizes. Organization and holding of events. Computer and office equipment maintenance. Network infrastructure and user support. Graphic design and printing. Moderation, content management of the organization's website and social networks." },
+          { title: "It Support Specialist | State Revenue Administration (Tax)", meta: "2024-2025, KZ - Arkalyk", desc: "Computer and office equipment maintenance. Network infrastructure and user support. Installation and configuration of video surveillance. Operational SLA. Maintenance of tax information systems. Digital policy and access rights." }
+        ],
+        education_h: "Education",
+        edus: [
+          { title: "Pascal Programming | Center for additional Education", meta: "2006, KZ - Arkalyk", desc: "" },
+          { title: "Bachelor of Computer Science | Arkalyk Pedagogical University named after I. Altynsarin", meta: "2007-2011, KZ - Arkalyk", desc: "" },
+          { title: "Orthopedic Dentistry | Higher Medical and Dental College of Professor Ruzuddinov", meta: "2015-2017, KZ - Astana", desc: "" },
+          { title: "Networks for the Youngest | habr.org", meta: "2019", desc: "" },
+          { title: "Interactive SQL Simulator | stepik.org", meta: "2024", desc: "" },
+          { title: "Financial Markets by Yale University | coursera.org <hr>Get started with Windows PowerShell | learn.microsoft.com <hr>Automate administrative tasks by using PowerShell | learn.microsoft.com <hr>PowerShell for Sysadmins: Workflow Automation Made Easy | book", meta: "2025", desc: "" }
+        ],
+        interests_h: "Interests",
+        interests: ["health and physical culture", "finance", "explore and discover", "travel", "books", "..."]
+      },
+
+      ru: {
+        name: "Сергей Петров",
+        role: "IT-поддержка, Системный администратор",
+        contact_phone: "📞💬 +7 777 8 135 999, WhatsApp",
+        contact_email: "✉️ serast25@proton.me",
+        skills_h: "Навыки",
+        skills: {
+          lang_title: "Языковые",
+          lang_items: ["Русский ★★★", "Английский ★★", "Казахский ★"],
+          soft_title: "Мягкие",
+          soft_items: ["Работа в комманде", "Эффективная коммуникация", "Задача>качество>скорость=результат", "Горизонт планирования", "Эмоциональный интеллект"],
+          hard_title: "Технические",
+          hard_items: ["Windows, Unix-подобные, Компьютерные сети", "Промпт-инжиринг LLM", "PowerShell, bash, AD, Git, KeePassXC", "HTML/CSS, JS, Python, SQL, Pascal", "Draw.io, Figma, SketchUp, Photoshop, GIMP, Corel"]
+        },
+        workExp_h: "Опыт работы",
+        jobs: [
+          { title: "Приготовление и реализация фастфуда | Dorney Park & Wildwater Kingdom", meta: "2010, США Пенсильвания - Аллентаун", desc: "" },
+          { title: "IT-поддержка | Центр развития языков при акимате города Аркалыка <hr>Системный администратор | АО Казпочта", meta: "2011-2015, РК - Аркалык", desc: "Обслуживание компьютеров, оргтехники и банкоматов. Поддержка сетевой инфраструктуры и пользователей. Оперативное SLA." },
+          { title: "Зубной техник стажёр | Частная зуботехническая лаборатория <hr>Зубной техник | ТОО Ескабылов <hr>Зубной техник | ТОО Маржан-Тыс", meta: "2015-2019, РК - Астана-Аркалык-Костанай", desc: "" },
+          { title: "Педагог дополнительного образования + IT-поддержка | Детско-юношеский центр Жас-Улан", meta: "2019-2023, РК - Аркалык", desc: "Преподавание компьютерных курсов для школьников - Front-End разработка, Python, графические редакторы - Figma-Gimp-Photoshop-CorelDRAW, 3D-моделирование, робототехника(Lego Mindstorms, Arduino). Участие воспитанников(школьников) в городских, областных и республиканских конкурсах и занимание ими призовых мест. Организация и проведение мероприятий. Обслуживание компьютеров и оргтехники. Поддержка сетевой инфраструктуры и пользователей. Графический дизайн и полиграфия. Модерация, контент-менеджмент сайта и социальных сетей организации. " },
+          { title: "IT-поддержка | Управление государственных доходов по городу Аркалыку", meta: "2024-2025, РК - Аркалык", desc: "Обслуживание компьютеров и оргтехники. Поддержка сетевой инфраструктуры и пользователей. Установка и настройка видеонаблюдения. Оперативное SLA. Сопровождение информационных систем налогообложения. Цифровая политика и права доступа." }
+        ],
+        education_h: "Образование",
+        edus: [
+          { title: "Программирование на Pascal | Центр дополнительного образования", meta: "2006, РК - Аркалык", desc: "" },
+          { title: "Бакалавр Computer Science | Аркалыкский педагогический университет им. И. Алтынсарина", meta: "2007-2011, РК - Аркалык", desc: "" },
+          { title: "Стоматология ортопедическая | Высший медико-стоматологический колледж профессора Рузуддинова", meta: "2015-2017, РК - Астана", desc: "" },
+          { title: "Сети для самых маленьких | habr.org", meta: "2019", desc: "" },
+          { title: "Интерактивный тренажер по SQL | stepik.org", meta: "2024", desc: "" },
+          { title: "Финансовые рынки | coursera.org <hr>Начало работы c Windows PowerShell | learn.microsoft.com <hr>Автоматизация административных задач с помощью PowerShell | learn.microsoft.com <hr>PowerShell для сисадминов: лёгкая автоматизация рабочего процесса | книга", meta: "2025", desc: "" }
+        ],
+        interests_h: "Интересы",
+        interests: ["здоровье и физическая культура", "финансы", "исследования и открытия", "путешествия", "книги", "..."]
+      },
+
+      kz: {
+        name: "Сергей Петров",
+        role: "It-қолдау, Жүйе әкімшісі",
+        contact_phone: "📞💬 +7 777 8 135 999, WhatsApp",
+        contact_email: "✉️ serast25@proton.me",
+        skills_h: "Дағдылар",
+        skills: {
+          lang_title: "Тілдік",
+          lang_items: ["Орыс ★★★", "Ағылшын ★★", "Қазақ ★"],
+          soft_title: "Жұмсақ",
+          soft_items: ["Топтық жұмыс", "Тиімді байланыс", "Тапсырма>сапа>жылдамдық=нәтиже", "Жоспарлау көкжиегі", "Эмоционалды интеллект"],
+          hard_title: "Кәсіптік",
+          hard_items: ["Windows, Unix-тәрізді, Компьютерлік желі", "LLM үшін промпт инженериясы", "PowerShell, bash, AD, Git, KeePassXC", "HTML/CSS, JS, Python, SQL, Pascal", "Draw.io, Figma, SketchUp, Photoshop, GIMP, Corel"]
+        },
+        workExp_h: "Жұмыс тәжірибесі",
+        jobs: [
+          { title: "Фаст-фудты дайындау және сату | Dorney Park & Wildwater Kingdom", meta: "2010, АҚШ Пенсильвания-Аллентаун", desc: "" },
+          { title: "It-қолдау | Арқалық қаласы әкімдігі жанындағы Тілдерді дамыту орталығы <hr>Жүйелік әкімші | Қазпошта АҚ", meta:" 2011-2015, ҚР - Арқалық", desc: "Компьютерлерге, кеңсе жабдықтарына және банкоматтарға қызмет көрсету. Желілік инфрақұрылымды және пайдаланушыларды қолдау. Жедел SLA." },
+          { title: "Стоматолог тағылымдамашы | жеке стоматологиялық зертхана <hr>Тіс технигі | Ескабылов ЖШС <hr>Тіс технигі | Маржан-тіс ЖШС", meta:"2015-2019, ҚР - Астана-Арқалық-Қостанай", desc: "Сипаттама 3" },
+          { title: "Қосымша білім беру педагогы + IT-қолдау | Жас Ұлан балалар мен жасөспірімдер орталығы", meta: "2019-2023, ҚР - Арқалық", desc: "Мектеп оқушыларына арналған компьютерлік курстарды оқыту-Front-End әзірлеу, Python, графикалық редакторлар-Figma-Gimp-Photoshop-CorelDRAW, 3D модельдеу, робототехника(Lego Mindstorms, Arduino). Тәрбиеленушілердің(оқушылардың) қалалық, облыстық және республикалық конкурстарға қатысуы және олардың жүлделі орындарға ие болуы. Іс-шараларды ұйымдастыру және өткізу. Компьютерлер мен кеңсе жабдықтарына қызмет көрсету. Желілік инфрақұрылымды және пайдаланушыларды қолдау. Графикалық дизайн және полиграфия. Ұйымның сайты мен әлеуметтік желілерін модерациялау, мазмұнды басқару." },
+          { title: "It-қолдау | Мемлекеттік кірістер комитетінің Арқалық ауданы", meta: "2024-2025, ҚР - Арқалық", desc: "Компьютерлер мен кеңсе жабдықтарына қызмет көрсету. Желілік инфрақұрылымды және пайдаланушыларды қолдау. Бейнебақылауды орнату және орнату. Жедел SLA. Салық салудың ақпараттық жүйелерін сүйемелдеу. Сандық саясат және қол жеткізу құқықтары." }
+          
+        ],
+        education_h: "Білім",
+        edus: [
+          { title: "Pascal бағдарламалау | қосымша білім беру орталығы", meta:" 2006, ҚР - Арқалық", desc:""},
+          { title: "Компьютерлік Ғылым Бакалавры | Ыбырай Алтынсарин атындағы Арқалық педагогикалық университеті", meta: "2007-2011, РК - Аркалык", desc: "" },
+          { title: "Ортопедиялық Стоматология | Профессор Рузуддинов жоғары медициналық-стоматологиялық колледжі", meta: "2015-2017, ҚР - Астана", desc: "" },
+          { title: "Кішкентайларға арналған желілер | habr.org", meta: "2019", desc: "" },
+          { title: "SQL бойынша интерактивті тренажер | stepik.org", meta: "2024", desc: "" },
+          { title: "Қаржы нарықтары | coursera.org <hr>Windows PowerShell-де бастау | learn.microsoft.com <hr>PowerShell көмегімен әкімшілік тапсырмаларды автоматтандыру | learn.microsoft.com <hr>Сисадминдерге арналған PowerShell: жұмыс процесін оңай автоматтандыру | кітап", meta: "2025", desc: "" }
+        ],
+        interests_h: "Қызығушылықтар",
+        interests: ["денсаулық және дене мәдениеті", "қаржы", "іздену және ашу", "саяхат", "кітаптар", "..."]
+      }
+    };
+
+    // ---------- helpers ----------
+    function getNested(obj, path){
+      if(!path) return undefined;
+      return path.split('.').reduce((o,k) => (o && o[k] !== undefined) ? o[k] : undefined, obj);
+    }
+
+    function applyTranslations(lang){
+      const t = translations[lang] || translations.en;
+
+      // simple data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const val = getNested(t, key);
+        if (val !== undefined) el.textContent = val;
+      });
+
+      // lists
+      document.querySelectorAll('[data-i18n-list]').forEach(el => {
+        const key = el.getAttribute('data-i18n-list');
+        const arr = getNested(t, key);
+        if (Array.isArray(arr)){
+          if (el.tagName.toLowerCase() === 'ul'){
+            el.innerHTML = arr.map(item => `<li>${item}</li>`).join('');
+          } else {
+            // chips or other containers
+            el.innerHTML = arr.map(item => `<span class="chip">${item}</span>`).join('');
+          }
+        }
+      });
+
+      // collections: jobs
+      const jobsContainer = document.getElementById('jobs');
+      const jobs = getNested(t, 'jobs');
+      if (jobsContainer && Array.isArray(jobs)){
+        jobsContainer.innerHTML = jobs.map(j => 
+          `<div class="job">
+            <div class="title">${j.title}</div>
+            <div class="meta">${j.meta}</div>
+            <div class="desc">${j.desc}</div>
+            <div class="divider-2"></div>
+          </div>`
+        ).join('');
+      }
+
+      // education
+      const eduContainer = document.getElementById('edu');
+      const edus = getNested(t, 'edus');
+      if (eduContainer && Array.isArray(edus)){
+        eduContainer.innerHTML = edus.map(e => 
+          `<div class="edu">
+            <div class="title">${e.title}</div>
+            <div class="meta">${e.meta}</div>
+            <div class="desc">${e.desc || ''}</div>
+            <div class="divider-2"></div>
+          </div>`
+        ).join('');
+      }
+
+      // update html lang (use 'kk' for Kazakh)
+      const docLang = (lang === 'kz') ? 'kk' : lang;
+      document.documentElement.lang = docLang;
+
+      // update active button states/aria-pressed
+      document.querySelectorAll('#lang-switcher button').forEach(btn => {
+        const isActive = btn.dataset.lang === lang;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', String(isActive));
+      });
+
+      // store choice
+      try { localStorage.setItem('cv_lang', lang); } catch(e){}
+    }
+
+    // ---------- init ----------
+    (function initLang(){
+      const saved = localStorage.getItem('cv_lang');
+      const start = saved || 'en';
+      // set up button listeners
+      document.querySelectorAll('#lang-switcher button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const lang = btn.dataset.lang;
+          applyTranslations(lang);
+        });
+      });
+      // apply initial
+      applyTranslations(start);
+    })();
+
+    // Optional: allow keyboard cycle with Ctrl+L (nice-to-have)
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'l'){
+        const order = ['en','ru','kz'];
+        const cur = localStorage.getItem('cv_lang') || 'en';
+        const next = order[(order.indexOf(cur) + 1) % order.length];
+        applyTranslations(next);
+      }
+    });
+  </script>
+</body>
+</html>
