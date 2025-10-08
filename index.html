@@ -88,14 +88,36 @@
       letter-spacing:-0.2px;
     }
     .role{
-      font-size:12px;
+      font-size:14px;
       color: rgb(177, 2, 2);
-      margin-top:6px;
+      margin-top: 2px;
       font-weight:600;
+      line-height:1.5;
+    }
+    .location{
+      font-size:12px;
+      color: rgb(0, 129, 43);
+      margin-top: 2px;
+      font-weight:600;
+      line-height:1.5;
+    }
+    .birth_date{
+      font-size:12px;
+      color: rgb(0, 129, 43);
+      margin-top: 2px;
+      font-weight:600;
+      line-height:1.5;
+    }
+    .marital_status{
+      font-size:12px;
+      color: rgb(0, 129, 43);
+      margin-top: 2px;
+      font-weight:600;
+      line-height:1.5;
     }
 
     .contact{
-      text-align:right;
+      text-align:left;
       font-size:13px;
       color:var(--muted);
       line-height:1.5;
@@ -180,9 +202,15 @@
       <div>
         <div class="name" data-i18n="name">Sergey Petrov</div>
         <div class="role" data-i18n="role">IT Support Specialist, System Administrator</div>
+        <div class="location" data-i18n="location">Astana, Kazakhstan</div>
+        <div class="birth_date" data-i18n="birth_date">December 17, 1990</div>
+        <div class="marital_status" data-i18n="marital_status">Marital status: Single</div>
       </div>
       <div class="contact">
-        <div data-i18n="contact_phone">📞💬 +7 777 8 135 999, WhatsApp</div>
+        <!-- <div data-i18n="contact_phone">📞💬 +7 777 8 135 999, WhatsApp</div>
+        <div data-i18n="contact_email">✉️ serast25@proton.me</div> -->
+        <div data-i18n="contact_phone">📞 +7 777 8 135 999</div>
+        <div data-i18n="contact_social">💬 WhatsApp</div>
         <div data-i18n="contact_email">✉️ serast25@proton.me</div>
       </div>
     </header>
@@ -244,7 +272,11 @@
       en: {
         name: "Sergey Petrov",
         role: "IT Support Specialist, System Administrator",
-        contact_phone: "📞💬 +7 777 8 135 999, WhatsApp",
+        location: "Astana, Kazakhstan",
+        birth_date: "December 17, 1990",
+        marital_status: "Marital status: Single",
+        contact_phone: "📞 +7 777 8 135 999",
+        contact_social: "💬 WhatsApp",
         contact_email: "✉️ serast25@proton.me",
         skills_h: "Skills",
         skills: {
@@ -279,7 +311,11 @@
       ru: {
         name: "Сергей Петров",
         role: "IT-поддержка, Системный администратор",
-        contact_phone: "📞💬 +7 777 8 135 999, WhatsApp",
+        location: "Астана, Казахстан",
+        birth_date: "17 декабря 1990",
+        marital_status: "Семейное положение: Холост",
+        contact_phone: "📞 +7 777 8 135 999",
+        contact_social: "💬 WhatsApp",
         contact_email: "✉️ serast25@proton.me",
         skills_h: "Навыки",
         skills: {
@@ -305,7 +341,7 @@
           { title: "Стоматология ортопедическая | Высший медико-стоматологический колледж профессора Рузуддинова", meta: "2015-2017, РК - Астана", desc: "" },
           { title: "Сети для самых маленьких | habr.org", meta: "2019", desc: "" },
           { title: "Интерактивный тренажер по SQL | stepik.org", meta: "2024", desc: "" },
-          { title: "Финансовые рынки | coursera.org <hr>Начало работы c Windows PowerShell | learn.microsoft.com <hr>Автоматизация административных задач с помощью PowerShell | learn.microsoft.com <hr>PowerShell для сисадминов: лёгкая автоматизация рабочего процесса | книга", meta: "2025", desc: "" }
+          { title: "Финансовые рынки | coursera.org <hr>Начало работы c Windows PowerShell | learn.microsoft.com <hr>Автоматизация административных задач с помощью PowerShell | learn.microsoft.com <hr>PowerShell для сисадминов: лёгкая автоматизация рабочего процесса", meta: "2025", desc: "" }
         ],
         interests_h: "Интересы",
         interests: ["здоровье и физическая культура", "финансы", "исследования и открытия", "путешествия", "книги", "..."]
@@ -314,7 +350,11 @@
       kz: {
         name: "Сергей Петров",
         role: "It-қолдау, Жүйе әкімшісі",
-        contact_phone: "📞💬 +7 777 8 135 999, WhatsApp",
+        location: "Астана, Қазақстан",
+        birth_date: "17 желтоқсан 1990",
+        marital_status: "Отбасылық жағдайы: бойдақ",
+        contact_phone: "📞 +7 777 8 135 999",
+        contact_social: "💬 WhatsApp",
         contact_email: "✉️ serast25@proton.me",
         skills_h: "Дағдылар",
         skills: {
@@ -341,7 +381,7 @@
           { title: "Ортопедиялық Стоматология | Профессор Рузуддинов жоғары медициналық-стоматологиялық колледжі", meta: "2015-2017, ҚР - Астана", desc: "" },
           { title: "Кішкентайларға арналған желілер | habr.org", meta: "2019", desc: "" },
           { title: "SQL бойынша интерактивті тренажер | stepik.org", meta: "2024", desc: "" },
-          { title: "Қаржы нарықтары | coursera.org <hr>Windows PowerShell-де бастау | learn.microsoft.com <hr>PowerShell көмегімен әкімшілік тапсырмаларды автоматтандыру | learn.microsoft.com <hr>Сисадминдерге арналған PowerShell: жұмыс процесін оңай автоматтандыру | кітап", meta: "2025", desc: "" }
+          { title: "Қаржы нарықтары | coursera.org <hr>Windows PowerShell-де бастау | learn.microsoft.com <hr>PowerShell көмегімен әкімшілік тапсырмаларды автоматтандыру | learn.microsoft.com <hr>Сисадминдерге арналған PowerShell: жұмыс процесін оңай автоматтандыру", meta: "2025", desc: "" }
         ],
         interests_h: "Қызығушылықтар",
         interests: ["денсаулық және дене мәдениеті", "қаржы", "іздену және ашу", "саяхат", "кітаптар", "..."]
